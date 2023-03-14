@@ -30,8 +30,8 @@ body {
 
 /* starting page */
 #starting-page {
-    display: none;
-    padding: 10%;
+    /* display: none; */
+    padding: 12% 10%;
 }
 
 #starting-page h1 {
@@ -51,7 +51,7 @@ body {
     margin-bottom: 1%;
 }
 
-#starting-page .start {
+#starting-page .start-button {
     border: 1.5px dashed var(--gold);
     border-radius: 20px;
     padding: 2%;
@@ -62,10 +62,10 @@ body {
     color: var(--gold);
     cursor: pointer;
     display: block;
-    margin: 8.5% auto 0;
+    margin: 10% auto 0;
 }
 
-#starting-page .start:hover {
+#starting-page .start-button:hover {
     border: 1.5px solid var(--gold);
     background-color: var(--gold);
     color: var(--navy);
@@ -73,7 +73,7 @@ body {
 
 /* quiz */
 #quiz {
-    /* display: none; */
+    display: none;
     padding: 3.5% 4.5%;
 }
 
@@ -87,6 +87,7 @@ body {
 #quiz button {
     display: block;
     margin-top: 1.5%;
+    max-width: 50vw;
     padding: 1.5% 5%;
     border: 1.5px dashed var(--gold);
     border-radius: 20px;
