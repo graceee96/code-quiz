@@ -73,23 +73,117 @@ body {
 
 /* quiz */
 #quiz {
-    display: none;
+    /* display: none; */
+    padding: 3.5% 4.5%;
 }
 
 /* question h2 */
-
+#quiz .question {
+    margin-bottom: 4%;
+    width: 55vw;
+    font-size: 190%;
+}
 /* answer button +hover */
+#quiz button {
+    display: block;
+    margin-top: 1.5%;
+    padding: 1.5% 5%;
+    border: 1.5px dashed var(--gold);
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 100;
+    font-size: 115%;
+}
+
+#quiz button:hover {
+    border: 1.5px solid var(--gold);
+    background-color: var(--gold);
+    color: var(--navy);
+}
 
 /* correct answer */
+#quiz button .correct-answer {
+    border: 1.5px solid var(--correct);
+    background-color: var(--correct);
+    font-weight: bolder;
+    letter-spacing: 0.5px;
+}
 
 /* incorrect answer */
+#quiz button .incorrect-answer {
+    border: 1.5px solid var(--incorrect);
+    background-color: var(--incorrect);
+    font-weight: bolder;
+    letter-spacing: 0.5px;
+}
 
-/* timer/score/view high score*/
+/* answer is right or wrong */
+#quiz .result {
+    margin: 3% 0 0 3%;
+    font-size: 120%;
+    font-weight: bolder;
+    font-style: oblique;
+    letter-spacing: 0.5px;
+    color: var(--gold);
+}
 
+/* aside (timer/score/view high score)*/
+ #quiz aside {
+    /* border: 1px solid var(--gold); */
+    width: 12vw;
+    position: absolute;
+    left: 79vw;
+    bottom: 43vw;
+ }
 
+#quiz #timer {
+    border: 2px solid var(--gold);
+    border-radius: 20px 20px 0 0;
+    padding: 5%;
+}
+
+#quiz #timer .timer-counter{
+    border-radius: 20px 20px 0 0;
+    text-align: center;
+    font-family: "Andale Mono", Consolas, monospace;
+    font-size: 300%;
+    color: var(--gold)
+}
+
+#quiz #score {
+    border: 2px solid var(--gold);
+    border-top: none;
+    border-bottom: none;
+    padding: 5%;
+}
+
+#quiz #score .score-counter{
+    text-align: center;
+    font-family: "Andale Mono", Consolas, monospace;
+    font-size: 300%;
+    color: var(--gold)
+}
+
+#quiz #view-highscore{
+    border: 2px solid var(--gold);
+    border-radius: 0 0 20px 20px;
+    text-align: center;
+    padding: 5%;
+    background-color: var(--gold);
+    color: var(--navy);
+}
+
+#quiz #view-highscore a{
+    background-color: var(--gold);
+    color: var(--navy);
+    text-decoration: none;
+    text-align: center;
+    font-size: 80%;
+    font-family: "Andale Mono", Consolas, monospace;
+}
 /* game over */
 #game-over {
-    /* display: none; */
+    display: none;
     padding: 10%;
 }
 
