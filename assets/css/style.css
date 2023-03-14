@@ -30,15 +30,14 @@ body {
 
 /* starting page */
 #starting-page {
+    display: none;
     padding: 10%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 }
 
 #starting-page h1 {
     font-size: 250%;
     text-transform: uppercase;
+    letter-spacing: 1px;
     text-align: center;
 }
 
@@ -60,19 +59,30 @@ body {
     margin-top: 8.5%;
     font-weight: bolder;
     letter-spacing: 0.5px;
-    color: var(--gold)
+    color: var(--gold);
+    cursor: pointer;
+    display: block;
+    margin: 8.5% auto 0;
 }
 
 #starting-page .start:hover {
     border: 1.5px solid var(--gold);
     background-color: var(--gold);
-    color: var(--navy)
+    color: var(--navy);
 }
 
 /* quiz */
 #quiz {
     display: none;
 }
+
+/* question h2 */
+
+/* answer button +hover */
+
+/* correct answer */
+
+/* incorrect answer */
 
 /* timer/score/view high score*/
 
@@ -85,4 +95,65 @@ body {
 /* high scores */
 #high-scores {
     display: none;
+    padding: 8%;
+}
+
+#high-scores h2 {
+    font-size: 200%;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-align: center;
+}
+
+#high-scores .score-list {
+    width: 30vw;
+    height: 20vh;
+    margin: auto;
+    padding: 4%;
+    border: 1.5px solid var(--gold);
+    border-radius: 20px 20px 0 0;
+    background-color: var(--gold);
+}
+
+#high-scores .score-list .score {
+    margin-left: 2.5vw;
+}
+
+#high-scores .score-list .score li {
+    background-color: var(--gold);
+    color: var(--navy);
+    font-family: "Andale Mono", Consolas, monospace;
+    list-style: num;
+}
+
+/* style buttons so they are in one row */
+#high-scores .goback-clear {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+}
+
+#high-scores .goback-clear .go-back,
+#high-scores .goback-clear .clear {
+    border: 1.5px solid var(--gold);
+    width: 15vw;
+    color: var(--gold);
+    padding: 2%;
+    cursor: pointer;
+    /* float: left; */
+}
+
+#high-scores .goback-clear .go-back:hover,
+#high-scores .goback-clear .clear:hover {
+    background-color: var(--gold);
+    color: var(--navy);
+}
+
+#high-scores .goback-clear .go-back {
+    border-radius: 0 0 0 20px;
+    border-right: none;
+}
+
+#high-scores .goback-clear .clear {
+    border-radius: 0 0 20px 0;
 }
