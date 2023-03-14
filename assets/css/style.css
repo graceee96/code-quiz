@@ -90,6 +90,61 @@ body {
 /* game over */
 #game-over {
     /* display: none; */
+    padding: 10%;
+}
+
+#game-over h3 {
+    text-align: center;
+    font-size: 150%;
+    font-weight: 100;
+}
+
+#game-over p {
+    text-align: center;
+}
+
+#game-over p .final-score {
+    font-family: "Andale Mono", Consolas, monospace;
+    font-size: 700%;
+    color: var(--gold);
+}
+
+#game-over .submit-initials {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+}
+
+#game-over .submit-initials .input-initials,
+#game-over .submit-initials .submit-button {
+    padding: 2%;
+    margin-top: 7%;
+}
+
+#game-over .submit-initials .input-initials {
+    border: 1.5px solid var(--gold);
+    border-right: none;
+    border-radius: 20px 0 0 20px;
+    width: 20vw;
+    font-family: "Andale Mono", Consolas, monospace;
+}
+
+#game-over .submit-initials .input-initials:focus {
+    outline: none;
+}
+
+#game-over .submit-initials .submit-button {
+    cursor: pointer;
+    border: 1.5px solid var(--gold);
+    border-radius: 0 20px 20px 0;
+    width: 8vw;
+    background-color: var(--gold);
+    color: var(--navy);
+}
+
+#game-over .submit-initials .submit-button:hover {
+    background-color: var(--navy);
+    color: var(--pink);
 }
 
 /* high scores */
@@ -140,7 +195,6 @@ body {
     color: var(--gold);
     padding: 2%;
     cursor: pointer;
-    /* float: left; */
 }
 
 #high-scores .goback-clear .go-back:hover,
