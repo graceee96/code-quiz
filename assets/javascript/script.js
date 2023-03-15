@@ -3,8 +3,15 @@ var startButton = document.querySelector('.start-button');
 var timerEl = document.querySelector('.timer-counter');
 var scoreEl = document.querySelector('.score-counter');
 var questionEl = document.querySelector('.question');
-var optionButton  = document.querySelector('.option');
+var optionA  = document.querySelector('.option-a');
+var optionB  = document.querySelector('.option-b');
+var optionC  = document.querySelector('.option-c');
+var optionD  = document.querySelector('.option-d');
 var viewHighScore = document.querySelector('.view-scores');
+var startingPage = document.querySelector('#starting-page');
+var quizPage = document.querySelector('#quiz');
+var gameOverPage = document.querySelector('#game-over');
+var highScorePage = document.querySelector('#high-scores');
 
 //form elements
 var initialsInput = document.querySelector('.input-initials');
@@ -16,176 +23,220 @@ var timerCount;
 var numCorrect = 0;
 var chosenQuestion = '';
 var answer;
-
-// question object constructor
-function Question(question, optionA, optionB, optionC, optionD, correctAnswer) {
-    this.question = question;
-    this.optionA = optionA;
-    this.optionB = optionB;
-    this.optionC = optionC;
-    this.optionD = optionD;
-    this.correctAnswer = correctAnswer
-};
+var isCorrect = false;
 
 // array of questions to ask - pick randomly
-var toAsk = [];
+var toAsk = [
+    {
+        question: "What are object properties separated by?",
+        options: [
+            {text: "semicolon", isCorrect: false},
+            {text: "spaces", isCorrect: false},
+            {text: "commas", isCorrect: true},
+            {text: "dashes", isCorrect: false}
+        ]
+    },
+    {
+        question: "Which array method adds items to the end of an array?",
+        options: [
+            {text: ".push()", isCorrect: true},
+            {text: ".pop()", isCorrect: false},
+            {text: ".shift()", isCorrect: false},
+            {text: ".slice()", isCorrect: false}
+        ]
+    },
+    {
+        question: "What does the CSS pseudo-class :hover do?",
+        options: [
+            {text: "it applies styles to an element that a mouse hovers over", isCorrect: true},
+            {text: "it applies styles to an element that a mouse is clicking on", isCorrect: false},
+            {text: "it applies style to an element a mouse has clicked", isCorrect: false},
+            {text: "it applies style to an element that has not been clicked", isCorrect: false}
+        ]
+    },
+    {
+        question: "What is the index number of the first item in an array?",
+        options: [
+            {text: "1", isCorrect: false},
+            {text: "0", isCorrect: true},
+            {text: "I", isCorrect: false},
+            {text: "A", isCorrect: false}
+        ]
+    },
+    {
+        question: "Where are JavaScript files linked in the HTML file?",
+        options: [
+            {text: "in the <head> section after stylesheets", isCorrect: false},
+            {text: "in the beginning of the <body> section before all code", isCorrect: false},
+            {text: "in the <head> section before stylesheets", isCorrect: false},
+            {text: "after all the HTML code in the <body> section", isCorrect: true}
+        ]
+    },
+    {
+        question: "Which of the following is NOT a primitive data type?",
+        options: [
+            {text: "undefined", isCorrect: false},
+            {text: "object", isCorrect: true},
+            {text: "number", isCorrect: false},
+            {text: "booleans", isCorrect: false}
+        ]
+    },
+    {
+        question: "Which CSS display property makes an element start on a new line?",
+        options: [
+            {text: "display: flex", isCorrect: false},
+            {text: "display: inline", isCorrect: false},
+            {text: "display: block", isCorrect: true},
+            {text: "display: none", isCorrect: false}
+        ]
+    },
+    {
+        question: "Which operator returns the remainder of two numbers?",
+        options: [
+            {text: "%", isCorrect: true},
+            {text: "/", isCorrect: false},
+            {text: "+", isCorrect: false},
+            {text: "-", isCorrect: false}
+        ]
+    },
+    {
+        question: "which statement is TRUE?",
+        options: [
+            {text: "9 == \"8 + 1\"", isCorrect: false},
+            {text: "\"six\" = \"six\"", isCorrect: false},
+            {text: " \"16\" === 16", isCorrect: false},
+            {text: "9 + 8 === 17", isCorrect: true}
+        ]
+    },
 
-var quest1 = new Question(
-    "What are object properties separated by?",
-    "semicolon",
-    "spaces",
-    "commas",
-    "dashes",
-    "optionC"
-);
+    {
+        question: "Which logical operator signifies that a condition is true if BOTH expressions are true?",
+        options: [
+            {text: "!", isCorrect: false},
+            {text: "||", isCorrect: false},
+            {text: "===", isCorrect: false},
+            {text: "&&", isCorrect: true}
+        ]
+    },
+    {
+        question: "What runs a code repeatedly until a specific condition is met?",
+        options: [
+            {text: "if-else loop", isCorrect: false},
+            {text: "functional loop", isCorrect: false},
+            {text: "for loop", isCorrect: true},
+            {text: "string concatenation", isCorrect: false}
+        ]
+    },
+    {
+        question: "Which event triggers a function when an HTML element is clicked?",
+        options: [
+            {text: "submit", isCorrect: false},
+            {text: "click", isCorrect: true},
+            {text: "dblclick", isCorrect: false},
+            {text: "mousedown", isCorrect: false}
+        ]
+    },
+    {
+        question: "What is another way of writing i + 1?",
+        options: [
+            {text: "i++", isCorrect: true},
+            {text: "i--", isCorrect: false},
+            {text: "i**", isCorrect: false},
+            {text: "i+=", isCorrect: false}
+        ]
+    },
+    {
+        question: "Which of the following runs a code if a condition is true, but will not run the code if the condition is not true?",
+        options: [
+            {text: "function", isCorrect: false},
+            {text: "else statement", isCorrect: false},
+            {text: "for loop", isCorrect: false},
+            {text: "if statement", isCorrect: true}
+        ]
+    },
+    {
+        question: "What operator is used when creating assigning values to variables?",
+        options: [
+            {text: ":", isCorrect: false},
+            {text: "-", isCorrect: false},
+            {text: "=", isCorrect: true},
+            {text: "===", isCorrect: false}
+        ]
+    },
+];
 
-var quest2 = new Question(
-    "Which array method adds items to the end of an array?",
-    ".push()",
-    ".pop()",
-    ".shift",
-    ".slice()",
-    "optionA"
-);
+//render pages
+function renderStartingPage() {
+    startingPage.setAttribute("style", "display: block");
+    quizPage.setAttribute("style", "display: none");
+    gameOverPage.setAttribute("style", "display: none");
+    highScorePage.setAttribute("style", "display: none");
+};
 
-var quest3 = new Question(
-    "What does the CSS pseudo-class :hover do?",
-    "it applies styles to an element that a mouse hovers over",
-    "it applies styles to an element that a mouse is clicking on",
-    "it applies style to an element a mouse has clicked",
-    "it applies style to an element that has not been clicked",
-    "option A"
-);
+function renderQuizPage() {
+    startingPage.setAttribute("style", "display: none");
+    quizPage.setAttribute("style", "display: block");
+    gameOverPage.setAttribute("style", "display: none");
+    highScorePage.setAttribute("style", "display: none");
 
-var quest4 = new Question(
-    "What is the index number of the first item in an array?",
-    "1",
-    "0",
-    "I",
-    "A",
-    "optionB"
-);
+    renderQuestions();
+};
 
-var quest5 = new Question(
-    "Where are JavaScript files linked in the HTML file?",
-    "in the <head> section after stylesheets",
-    "in the beginning of the <body> section before all code",
-    "in the <head> section before stylesheets",
-    "after all the HTML code in the <body> section",
-    "optionD"
-);
+function renderGameOverPage() {
+    startingPage.setAttribute("style", "display: none");
+    quizPage.setAttribute("style", "display: none");
+    gameOverPage.setAttribute("style", "display: block");
+    highScorePage.setAttribute("style", "display: none");
+};
 
-var quest6 = new Question(
-    "Which of the following is NOT a primitive data type?",
-    "undefined",
-    "object",
-    "number",
-    "booleans",
-    "optionB"
-);
-
-var quest7 = new Question(
-    "Which CSS display property makes an element start on a new line?",
-    "display: flex",
-    "display: inline",
-    "display: block",
-    "display: none",
-    "optionC"
-);
-
-var quest8 = new Question(
-    "Which operator returns the remainder of two numbers?",
-    "%",
-    "/",
-    "+",
-    "-",
-    "optionA"
-);
-
-var quest9 = new Question(
-    "which statement is TRUE?",
-    "9 == \"8 + 1\"",
-    "\"six\" = \"six\"",
-    " \"16\" === 16",
-    "9 + 8 === 17",
-    "optionD"
-);
-
-var quest10 = new Question(
-    "Which logical operator signifies that a condition is true if BOTH expressions are true?",
-    "!",
-    "||",
-    "!!",
-    "&&",
-    "optionD"
-);
-
-var quest11 = new Question(
-    "What runs a code repeatedly until a specific condition is met?",
-    "if-else loop",
-    "functional loop",
-    "for loop",
-    "string concatenation",
-    "optionC"
-);
-
-var quest12 = new Question(
-    "Which event triggers a function when an HTML element is clicked?",
-    "submit",
-    "click",
-    "dblclick",
-    "mousedown",
-    "optionB"
-);
-
-var quest13 = new Question(
-    "What is another way of writing i + 1",
-    "i++",
-    "i--",
-    "i**",
-    "i+=",
-    "optionA"
-);
-
-var quest14 = new Question(
-    "Which of the following runs a code if a condition is true?",
-    "function",
-    "else statement",
-    "for loop",
-    "if statement",
-    "optionD"
-);
-
-var quest15 = new Question(
-    "What operator is used when creating assigning values to variables?",
-    ":",
-    "-",
-    "=",
-    "==",
-    "optionC"
-);
-
-toAsk.push(quest1, quest2, quest3, quest4, quest5, quest6, quest7, quest8, quest9, quest10, quest11, quest12, quest13, quest14, quest15);
-
-console.log(toAsk);
+function renderHighScoresPage() {
+    startingPage.setAttribute("style", "display: none");
+    quizPage.setAttribute("style", "display: none");
+    gameOverPage.setAttribute("style", "display: none");
+    highScorePage.setAttribute("style", "display: block");
+};
 
 //starting page goes away, quiz page is shown, timer starts
-
+function quizStart() {
+    isCorrect = false;
+    timerStart();
+    renderQuizPage();
+};
 
 //timer starts
+function timerStart() {
+    timer = setInterval(function() {
+        timerCount--;
+        timerEl.textContent = timerCount;
+        if (timerCount >= 0) {
+            if (isCorrect && timerCount > 0) {
+                clearInterval(timer);
+                renderGameOverPage;
+            }
+        }
+        if (timerCount === 0) {
+            clearInterval(timer);
+            renderGameOverPage
+        }
+    }, 1000);
+};
 
 //questions show up on quiz page pick a question randomly
+function renderQuestions() {
+    
 
 //answer is correct -- if i answered correctly then score goes up by 10pts & correct message pops up
+function isCorrect();
 
 //answer is incorrect -- if i answered incorrectly then timer goes down by 10 seconds & incorrect message pops up
+function isWrong();
 
 //when i click on view high scores, i stop seeing quiz page, and i see list of high scores
 
-//show score
-
 //game over -- stop game, show game over page
+function gameOver();
+
+//display list of high scores in order of high scores
 
 //input initials & submit (event listener) --> store in local storage
 
-//display list of high scores in order of high scores

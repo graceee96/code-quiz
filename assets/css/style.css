@@ -30,7 +30,7 @@ body {
 
 /* starting page */
 #starting-page {
-    /* display: none; */
+    display: block;
     padding: 12% 10%;
 }
 
@@ -174,14 +174,12 @@ body {
     color: var(--navy);
 }
 
-#quiz #view-highscore a{
-    background-color: var(--gold);
-    color: var(--navy);
-    text-decoration: none;
-    text-align: center;
-    font-size: 80%;
-    font-family: "Andale Mono", Consolas, monospace;
+#quiz #view-highscore:hover{
+    cursor: pointer;
+    background-color: var(--navy);
+    color: var(--gold);
 }
+
 /* game over */
 #game-over {
     display: none;
