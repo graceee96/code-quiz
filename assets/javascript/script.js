@@ -240,3 +240,5 @@ function gameOver();
 
 //input initials & submit (event listener) --> store in local storage
 
+
+startButton.addEventListener("click", quizStart);
