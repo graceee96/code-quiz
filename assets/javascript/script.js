@@ -223,18 +223,26 @@ function timerStart() {
 
 //questions show up on quiz page pick a question randomly
 function renderQuestions() {
+    questionEl.textContent = toAsk[index].question;
+    optionA.textContent = toAsk[index].options[0].text;
+    optionB.textContent = toAsk[index].options[1].text;
+    optionC.textContent = toAsk[index].options[2].text;
+    optionD.textContent = toAsk[index].options[3].text;
+
+    index++;
+}
     
 
 //answer is correct -- if i answered correctly then score goes up by 10pts & correct message pops up
-function isCorrect();
+// function isCorrect();
 
 //answer is incorrect -- if i answered incorrectly then timer goes down by 10 seconds & incorrect message pops up
-function isWrong();
+// function isWrong();
 
 //when i click on view high scores, i stop seeing quiz page, and i see list of high scores
 
 //game over -- stop game, show game over page
-function gameOver();
+// function gameOver();
 
 //display list of high scores in order of high scores
 
