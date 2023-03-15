@@ -3,6 +3,7 @@ var startButton = document.querySelector('.start-button');
 var timerEl = document.querySelector('.timer-counter');
 var scoreEl = document.querySelector('.score-counter');
 var questionEl = document.querySelector('.question');
+var optionsDiv = document.querySelector('#options');
 var optionA  = document.querySelector('.option-a');
 var optionB  = document.querySelector('.option-b');
 var optionC  = document.querySelector('.option-c');
@@ -23,9 +24,10 @@ var timerCount;
 var numCorrect = 0;
 var chosenQuestion = '';
 var answer;
-var isCorrect = false;
+var totalQuestions = 15;
+var questionIndex = 0;
 
-// array of questions to ask - pick randomly
+// array of questions to ask
 var toAsk = [
     {
         question: "What are object properties separated by?",
@@ -199,50 +201,57 @@ function renderHighScoresPage() {
 //starting page goes away, quiz page is shown, timer starts
 function quizStart() {
     isCorrect = false;
+    timerCount = 90;
     timerStart();
     renderQuizPage();
 };
 
 //timer starts
+// timer stops when there are no more questions and if there is no time left
 function timerStart() {
     timer = setInterval(function() {
         timerCount--;
         timerEl.textContent = timerCount;
         if (timerCount >= 0) {
-            if (isCorrect && timerCount > 0) {
+            if (totalQuestions === 0 && timerCount > 0) {
                 clearInterval(timer);
-                renderGameOverPage;
+                renderGameOverPage();
             }
         }
         if (timerCount === 0) {
             clearInterval(timer);
-            renderGameOverPage
+            renderGameOverPage();
         }
     }, 1000);
 };
 
 //questions show up on quiz page pick a question randomly
 function renderQuestions() {
-    questionEl.textContent = toAsk[index].question;
-    optionA.textContent = toAsk[index].options[0].text;
-    optionB.textContent = toAsk[index].options[1].text;
-    optionC.textContent = toAsk[index].options[2].text;
-    optionD.textContent = toAsk[index].options[3].text;
-
-    index++;
-}
-    
+    questionEl.textContent = toAsk[questionIndex].question;
+    optionA.textContent = toAsk[questionIndex].options[0].text;
+    optionB.textContent = toAsk[questionIndex].options[1].text;
+    optionC.textContent = toAsk[questionIndex].options[2].text;
+    optionD.textContent = toAsk[questionIndex].options[3].text;
+    totalQuestions--;
+};
 
 //answer is correct -- if i answered correctly then score goes up by 10pts & correct message pops up
-// function isCorrect();
-
 //answer is incorrect -- if i answered incorrectly then timer goes down by 10 seconds & incorrect message pops up
-// function isWrong();
+function isCorrect() {
+    if (toAsk[questionIndex].options[0].isCorrect) {
+        numCorrect += 10;
+        scoreEl.textContent = numCorrect;
+        questionIndex++;
+        renderQuestions();
+    } else {
+        timerCount -=10;
+        timerEl.textContent = timerCount;
+        questionIndex++;
+        renderQuestions();
+    };
+};
 
 //when i click on view high scores, i stop seeing quiz page, and i see list of high scores
-
-//game over -- stop game, show game over page
-// function gameOver();
 
 //display list of high scores in order of high scores
 
@@ -250,3 +259,11 @@ function renderQuestions() {
 
 
 startButton.addEventListener("click", quizStart);
+
+optionsDiv.addEventListener("click", function(event) {
+    var element = event.target;
+
+    if (element.matches(".option-btn")) {
+        isCorrect();
+    }
+});

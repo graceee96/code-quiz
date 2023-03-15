@@ -23,10 +23,12 @@
 <!-- quiz -->
     <section id="quiz" class="card">
         <h2 class="question"></h2>
-        <button class="option-a"></button>
-        <button class="option-b"></button>
-        <button class="option-c"></button>
-        <button class="option-d"></button>
+        <div id="options">
+            <button class="option-a option-btn"></button>
+            <button class="option-b option-btn"></button>
+            <button class="option-c option-btn"></button>
+            <button class="option-d option-btn"></button>
+        </div>
         <h5 class="result"></h5>
 
         <aside>
@@ -43,7 +45,7 @@
 <!-- game over -->
     <section id="game-over" class="card">
         <h3>your final score is:</h3>
-        <p><span class="final-score"></span></p>
+        <p><span class="score-counter"></span></p>
         <div class="submit-initials">
             <input type="text" name="initials" value="enter initials"  class="input-initials"/>
             <button class="submit-button">submit</button>
