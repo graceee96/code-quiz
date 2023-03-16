@@ -221,17 +221,13 @@ function renderHighScoresPage() {
     displayHighScores();
 };
 
-//starting page goes away, quiz page is shown, timer starts
+//reset default value when a new game starts
 function newGame() {
     numCorrect = 0;
     timerCount = 90;
     scoreEl.textContent = numCorrect;
     timerEl.textContent = timerCount; 
     questionIndex = 0;
-}
-
-function init() {
-    newGame();
 }
 
 function quizStart() {
@@ -273,7 +269,6 @@ function renderQuestions() {
     optionD.value = toAsk[questionIndex].options[3].isCorrect; //sets data value to isCorrect
 
     totalQuestions--;
-
 };
 
 //answer is correct -- if i answered correctly then score goes up by 10pts & correct message pops up
@@ -308,9 +303,6 @@ function ifCorrect(answer) {
     };
 };
 
-//when i click on view high scores, i stop seeing quiz page, and i see list of high scores
-
-
 //display list of high scores in order of high scores
 function storeHighScore() {
     var playerStats = {
@@ -332,7 +324,8 @@ function displayHighScores() {
     }
 }
 
-init();
+
+newGame();
 
 startButton.addEventListener("click", quizStart);
 
