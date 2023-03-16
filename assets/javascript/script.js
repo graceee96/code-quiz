@@ -18,6 +18,7 @@ var optionA  = document.querySelector('.option-a');
 var optionB  = document.querySelector('.option-b');
 var optionC  = document.querySelector('.option-c');
 var optionD  = document.querySelector('.option-d');
+var showResult = document.querySelector('.result');
 
 
 //form elements -- game over page
@@ -243,13 +244,15 @@ function renderQuestions() {
 
 //answer is correct -- if i answered correctly then score goes up by 10pts & correct message pops up selected button turns green
 //answer is incorrect -- if i answered incorrectly then timer goes down by 10 seconds & incorrect message pops up selected button turns red
-function isCorrect() {
+function checkIfCorrect() {
     if (toAsk[questionIndex].options[0].isCorrect) {
+        showResult.textContent = ">> correct!! 😎"
         numCorrect += 10;
         scoreEl.textContent = numCorrect;
         questionIndex++;
         renderQuestions();
     } else {
+        showResult.textContent = ">> wrong!! 😟"
         timerCount -=10;
         timerEl.textContent = timerCount;
         questionIndex++;
@@ -269,7 +272,11 @@ startButton.addEventListener("click", quizStart);
 optionsDiv.addEventListener("click", function(event) {
     var element = event.target;
 
+    console.log(event);
+    console.log(element);
+
     if (element.matches(".option-btn")) {
-        isCorrect();
+        checkIfCorrect();
     }
 });
+
