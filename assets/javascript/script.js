@@ -1,20 +1,26 @@
-//html elements
-var startButton = document.querySelector('.start-button');
-var timerEl = document.querySelector('.timer-counter');
-var scoreEl = document.querySelector('.score-counter');
-var questionEl = document.querySelector('.question');
-var optionsDiv = document.querySelector('#options');
-var optionA  = document.querySelector('.option-a');
-var optionB  = document.querySelector('.option-b');
-var optionC  = document.querySelector('.option-c');
-var optionD  = document.querySelector('.option-d');
-var viewHighScore = document.querySelector('.view-scores');
+//access different pages
 var startingPage = document.querySelector('#starting-page');
 var quizPage = document.querySelector('#quiz');
 var gameOverPage = document.querySelector('#game-over');
 var highScorePage = document.querySelector('#high-scores');
 
-//form elements
+var startButton = document.querySelector('.start-button');
+
+//timer-score-view high score aside thing
+var timerEl = document.querySelector('.timer-counter');
+var scoreEl = document.querySelector('.score-counter');
+var viewHighScore = document.querySelector('.view-scores');
+
+//quiz page
+var questionEl = document.querySelector('.question');
+var optionsDiv = document.querySelector('#options'); // for event delegation
+var optionA  = document.querySelector('.option-a');
+var optionB  = document.querySelector('.option-b');
+var optionC  = document.querySelector('.option-c');
+var optionD  = document.querySelector('.option-d');
+
+
+//form elements -- game over page
 var initialsInput = document.querySelector('.input-initials');
 var initialsSubmit = document.querySelector('.submit-button');
 
@@ -235,8 +241,8 @@ function renderQuestions() {
     totalQuestions--;
 };
 
-//answer is correct -- if i answered correctly then score goes up by 10pts & correct message pops up
-//answer is incorrect -- if i answered incorrectly then timer goes down by 10 seconds & incorrect message pops up
+//answer is correct -- if i answered correctly then score goes up by 10pts & correct message pops up selected button turns green
+//answer is incorrect -- if i answered incorrectly then timer goes down by 10 seconds & incorrect message pops up selected button turns red
 function isCorrect() {
     if (toAsk[questionIndex].options[0].isCorrect) {
         numCorrect += 10;

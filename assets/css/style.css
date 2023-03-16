@@ -23,15 +23,15 @@ body {
 
 /* content area */
 .card {
-    width: 70vw;
-    height: 50vh;
+    width: 800px;
+    height: 500px;
     border: 2px solid var(--gold);
 }
 
 /* starting page */
 #starting-page {
     display: block;
-    padding: 12% 10%;
+    padding: 110px;
 }
 
 #starting-page h1 {
@@ -55,8 +55,8 @@ body {
     border: 1.5px dashed var(--gold);
     border-radius: 20px;
     padding: 2%;
-    width: 30%;
-    margin-top: 8.5%;
+    width: 200px;
+    margin-top: 9%;
     font-weight: bolder;
     letter-spacing: 0.5px;
     color: var(--gold);
@@ -80,14 +80,14 @@ body {
 /* question h2 */
 #quiz .question {
     margin-bottom: 4%;
-    width: 55vw;
+    width: 555px;
     font-size: 190%;
 }
 /* answer button +hover */
 #quiz button {
     display: block;
     margin-top: 1.5%;
-    max-width: 50vw;
+    max-width: 550px;
     padding: 1.5% 5%;
     border: 1.5px dashed var(--gold);
     border-radius: 20px;
@@ -131,10 +131,11 @@ body {
 /* aside (timer/score/view high score)*/
  #quiz aside {
     /* border: 1px solid var(--gold); */
-    width: 12vw;
+    width: 150px;
+    height: 200px;
     position: absolute;
-    left: 79vw;
-    top: 43vw;
+    left: 880px;
+    top: 295px;
  }
 
 #quiz #timer {
@@ -218,7 +219,7 @@ body {
     border: 1.5px solid var(--gold);
     border-right: none;
     border-radius: 20px 0 0 20px;
-    width: 20vw;
+    width: 300px;
     font-family: "Andale Mono", Consolas, monospace;
 }
 
@@ -230,7 +231,7 @@ body {
     cursor: pointer;
     border: 1.5px solid var(--gold);
     border-radius: 0 20px 20px 0;
-    width: 8vw;
+    width: 97px;
     background-color: var(--gold);
     color: var(--navy);
 }
@@ -243,7 +244,7 @@ body {
 /* high scores */
 #high-scores {
     display: none;
-    padding: 8%;
+    padding: 10%;
 }
 
 #high-scores h2 {
@@ -254,8 +255,8 @@ body {
 }
 
 #high-scores .score-list {
-    width: 30vw;
-    height: 20vh;
+    width: 350px;
+    height: 175px;
     margin: auto;
     padding: 4%;
     border: 1.5px solid var(--gold);
@@ -284,7 +285,7 @@ body {
 #high-scores .goback-clear .go-back,
 #high-scores .goback-clear .clear {
     border: 1.5px solid var(--gold);
-    width: 15vw;
+    width: 175px;
     color: var(--gold);
     padding: 2%;
     cursor: pointer;
