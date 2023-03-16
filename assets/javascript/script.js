@@ -291,7 +291,7 @@ function ifCorrect(answer) {
         renderQuestions();
 
         console.log("you are correct");
-        }, 1000)
+        }, 500)
 
     } else {
         showResult.textContent = ">>> wrong!! 😟";
@@ -304,7 +304,7 @@ function ifCorrect(answer) {
             renderQuestions();
     
             console.log("you are incorrect") 
-        }, 1000)
+        }, 500)
     };
 };
 

@@ -209,6 +209,10 @@ body {
     font-family: "Andale Mono", Consolas, monospace;
 }
 
+::placeholder {
+    color: var(--pink);
+}
+
 #game-over .submit-initials .input-initials:focus {
     outline: none;
 }
