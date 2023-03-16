@@ -10,7 +10,7 @@ var startButton = document.querySelector('.start-button');
 //html element - quiz page: timer-score-view high score aside thing
 var timerEl = document.querySelector('.timer-counter');
 var scoreEl = document.querySelector('.score-counter');
-var viewHighScore = document.querySelector('.view-scores');
+var viewHighScoreButton = document.querySelector('.view-scores');
 
 //html element - quiz page
 var questionEl = document.querySelector('.question');
@@ -30,7 +30,7 @@ var initialsSubmit = document.querySelector('.submit-button');
 //html elements - high score page
 var highScoreList = document.querySelector('.score');
 var goBackButton = document.querySelector('.go-back');
-var clearButton = document.querySelector('.clear-back');
+var clearButton = document.querySelector('.clear');
 
 //global variables
 var timer;
@@ -222,6 +222,18 @@ function renderHighScoresPage() {
 };
 
 //starting page goes away, quiz page is shown, timer starts
+function newGame() {
+    numCorrect = 0;
+    timerCount = 90;
+    scoreEl.textContent = numCorrect;
+    timerEl.textContent = timerCount; 
+    questionIndex = 0;
+}
+
+function init() {
+    newGame();
+}
+
 function quizStart() {
     timerStart();
     renderQuizPage();
@@ -269,20 +281,20 @@ function renderQuestions() {
 //answer is incorrect -- if i answered incorrectly then timer goes down by 10 seconds & incorrect message pops up 
 function ifCorrect(answer) {
     console.log("This is the answer: " + answer);
-    if (answer) {
+    if (answer === "true") {
         numCorrect += 10;
         scoreEl.textContent = numCorrect;
-
         questionIndex++;
         renderQuestions();
-    } 
-    
-    if (!answer) {
+
+        console.log("you are correct");
+    } else {
         timerCount -=10;
         timerEl.textContent = timerCount;
-
         questionIndex++;
         renderQuestions();
+
+        console.log("you are incorrect")
     };
 };
 
@@ -290,6 +302,15 @@ function ifCorrect(answer) {
 
 
 //display list of high scores in order of high scores
+function storeHighScore() {
+    var playerStats = {
+        initials: initialsInput.value.trim(),
+        score: numCorrect
+    };
+
+    localStorage.setItem("playerStats", JSON.stringify(playerStats));
+};
+
 function displayHighScores() {
     var lastPlayerStats = JSON.parse(localStorage.getItem("playerStats"));
 
@@ -301,7 +322,10 @@ function displayHighScores() {
     }
 }
 
+init();
+
 startButton.addEventListener("click", quizStart);
+
 
 optionsDiv.addEventListener("click", function(event) {
     var element = event.target;
@@ -314,17 +338,20 @@ optionsDiv.addEventListener("click", function(event) {
     }
 });
 
-initialsSubmit.addEventListener('click', function() {
+initialsSubmit.addEventListener('click', function(event) {
     event.preventDefault;
-
-    var playerStats = {
-        initials: initialsInput.value.trim(),
-        score: numCorrect
-    };
-
-    localStorage.setItem("playerStats", JSON.stringify(playerStats));
-
+    storeHighScore();
     renderHighScoresPage();
 });
 
-goBackButton.addEventListener('click', renderStartingPage);
+goBackButton.addEventListener('click', function() {
+    renderStartingPage();
+    newGame();
+});
+
+clearButton.addEventListener('click', function(event) {
+    localStorage.clear();
+
+    storeHighScore();
+    displayHighScores();
+})
