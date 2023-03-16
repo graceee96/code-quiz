@@ -22,8 +22,11 @@ var showResult = document.querySelector('.result');
 
 
 //form elements -- game over page
+var finalScore = document.querySelector('.final-score');
 var initialsInput = document.querySelector('.input-initials');
 var initialsSubmit = document.querySelector('.submit-button');
+
+var highScoreList = document.querySelector('.score');
 
 //global variables
 var timer;
@@ -31,7 +34,6 @@ var timerCount;
 var numCorrect = 0;
 var chosenQuestion = '';
 var answer;
-var totalQuestions = 15;
 var questionIndex = 0;
 
 // array of questions to ask
@@ -174,6 +176,8 @@ var toAsk = [
     },
 ];
 
+var totalQuestions = toAsk.length;
+
 //render pages
 function renderStartingPage() {
     startingPage.setAttribute("style", "display: block");
@@ -196,6 +200,9 @@ function renderGameOverPage() {
     quizPage.setAttribute("style", "display: none");
     gameOverPage.setAttribute("style", "display: block");
     highScorePage.setAttribute("style", "display: none");
+
+    finalScore.textContent = numCorrect;
+    localStorage.setItem("score", numCorrect);
 };
 
 function renderHighScoresPage() {
@@ -203,6 +210,8 @@ function renderHighScoresPage() {
     quizPage.setAttribute("style", "display: none");
     gameOverPage.setAttribute("style", "display: none");
     highScorePage.setAttribute("style", "display: block");
+
+    renderHighScores();
 };
 
 //starting page goes away, quiz page is shown, timer starts
@@ -219,13 +228,13 @@ function timerStart() {
     timer = setInterval(function() {
         timerCount--;
         timerEl.textContent = timerCount;
-        if (timerCount >= 0) {
+        if (timerCount > 0) {
             if (totalQuestions === 0 && timerCount > 0) {
                 clearInterval(timer);
                 renderGameOverPage();
             }
         }
-        if (timerCount === 0) {
+        if (timerCount <= 0) {
             clearInterval(timer);
             renderGameOverPage();
         }
@@ -240,19 +249,18 @@ function renderQuestions() {
     optionC.textContent = toAsk[questionIndex].options[2].text;
     optionD.textContent = toAsk[questionIndex].options[3].text;
     totalQuestions--;
+    showResult.setAttribute("style", "visibility: hidden");
 };
 
 //answer is correct -- if i answered correctly then score goes up by 10pts & correct message pops up selected button turns green
 //answer is incorrect -- if i answered incorrectly then timer goes down by 10 seconds & incorrect message pops up selected button turns red
-function checkIfCorrect() {
+function ifCorrect() {
     if (toAsk[questionIndex].options[0].isCorrect) {
-        showResult.textContent = ">> correct!! 😎"
         numCorrect += 10;
         scoreEl.textContent = numCorrect;
         questionIndex++;
         renderQuestions();
     } else {
-        showResult.textContent = ">> wrong!! 😟"
         timerCount -=10;
         timerEl.textContent = timerCount;
         questionIndex++;
@@ -260,12 +268,13 @@ function checkIfCorrect() {
     };
 };
 
+//when i click on the right answer, a message pops up and the button changes color
+
+//store initials text input into a variable in local storage + score
+
 //when i click on view high scores, i stop seeing quiz page, and i see list of high scores
 
 //display list of high scores in order of high scores
-
-//input initials & submit (event listener) --> store in local storage
-
 
 startButton.addEventListener("click", quizStart);
 
@@ -276,7 +285,23 @@ optionsDiv.addEventListener("click", function(event) {
     console.log(element);
 
     if (element.matches(".option-btn")) {
-        checkIfCorrect();
+        ifCorrect();
     }
 });
 
+initialsSubmit.addEventListener('click', function() {
+    var initials = initialsInput.value.trim();
+
+    localStorage.setItem("initials", initials);
+
+    renderHighScoresPage();
+})
+
+function renderHighScores() {
+    var playerInitials = getItem("initials");
+    var playerScore = getItem("score");
+    var scoreListItem = document.createElement("li");
+
+    scoreListItem.textContent = playerInitials + " --- " + playerScore;
+    highScoreList.appendChild(scoreListItem);
+}

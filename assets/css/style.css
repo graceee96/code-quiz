@@ -197,7 +197,8 @@ body {
     text-align: center;
 }
 
-#game-over p .final-score {
+#game-over .final-score {
+    text-align: center;
     font-family: "Andale Mono", Consolas, monospace;
     font-size: 700%;
     color: var(--gold);

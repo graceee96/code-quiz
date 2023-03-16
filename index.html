@@ -45,9 +45,9 @@
 <!-- game over -->
     <section id="game-over" class="card">
         <h3>your final score is:</h3>
-        <p><span class="score-counter"></span></p>
+        <h4 class="final-score"></h4>
         <div class="submit-initials">
-            <input type="text" name="initials" value="enter initials" onfocus=""  class="input-initials"/>
+            <input type="text" name="initials" value="enter initials" onfocus="this.value=''"  class="input-initials"/>
             <button class="submit-button">submit</button>
         </div>
     </section>
@@ -57,7 +57,6 @@
         <h2>high scores</h2>
         <div class="score-list">
             <ol class="score">
-                <li class="player-score"></li>
             </ol>
         </div>
         <div class="goback-clear">
