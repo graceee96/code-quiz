@@ -10,7 +10,7 @@ var startButton = document.querySelector('.start-button');
 //html element - quiz page: timer-score-view high score aside thing
 var timerEl = document.querySelector('.timer-counter');
 var scoreEl = document.querySelector('.score-counter');
-var viewHighScoreButton = document.querySelector('.view-scores');
+var viewHighScoreButton = document.querySelector('#view-highscore');
 
 //html element - quiz page
 var questionEl = document.querySelector('.question');
@@ -260,7 +260,6 @@ function timerStart() {
 
 //questions show up on quiz page pick a question randomly
 function renderQuestions() {
-    showResult.setAttribute("style", "visibility: hidden");
 
     questionEl.textContent = toAsk[questionIndex].question;
     optionA.textContent = toAsk[questionIndex].options[0].text;
@@ -281,20 +280,31 @@ function renderQuestions() {
 //answer is incorrect -- if i answered incorrectly then timer goes down by 10 seconds & incorrect message pops up 
 function ifCorrect(answer) {
     console.log("This is the answer: " + answer);
-    if (answer === "true") {
-        numCorrect += 10;
+    if (answer == "true") {
+        showResult.textContent = ">>> correct!! 😎";
+        var waitToRender = setTimeout(function() {
+            numCorrect += 10;
         scoreEl.textContent = numCorrect;
         questionIndex++;
+
+        showResult.textContent = ""
         renderQuestions();
 
         console.log("you are correct");
-    } else {
-        timerCount -=10;
-        timerEl.textContent = timerCount;
-        questionIndex++;
-        renderQuestions();
+        }, 1000)
 
-        console.log("you are incorrect")
+    } else {
+        showResult.textContent = ">>> wrong!! 😟";
+        timerCount -=10;
+        var waitToRender = setTimeout(function() {
+            timerEl.textContent = timerCount;
+            questionIndex++;
+    
+            showResult.textContent = ""
+            renderQuestions();
+    
+            console.log("you are incorrect") 
+        }, 1000)
     };
 };
 
@@ -326,6 +336,7 @@ init();
 
 startButton.addEventListener("click", quizStart);
 
+viewHighScoreButton.addEventListener("click", renderHighScoresPage);
 
 optionsDiv.addEventListener("click", function(event) {
     var element = event.target;
@@ -349,9 +360,7 @@ goBackButton.addEventListener('click', function() {
     newGame();
 });
 
-clearButton.addEventListener('click', function(event) {
-    localStorage.clear();
-
-    storeHighScore();
-    displayHighScores();
+clearButton.addEventListener('click', function() {
+    localStorage.setItem("playerStats", JSON.stringify([]));
+    highScoreList.innerHTML = "";
 })

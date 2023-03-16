@@ -1,7 +1,7 @@
 # CODE QUIZ CHALLENGE
 
 ## Description
-The purpose of this application is to test users on their knowledge of coding, specifically HTML, CSS, and JavaScript.
+The purpose of this application is to test coding bootcamps on their knowledge of coding, specifically HTML, CSS, and JavaScript. They can then see the list of high scores in the end to compare their progress with that of their peers.
 
 ## Installation
 N/A
