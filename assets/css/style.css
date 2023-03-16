@@ -2,8 +2,6 @@
     --navy: #4E6E81;
     --gold: #F8CB2E;
     --pink: #FAEDF0;
-    --incorrect: #EE6F57;
-    --correct: #03C4A1;
 }
 
 * {
@@ -100,22 +98,6 @@ body {
     border: 1.5px solid var(--gold);
     background-color: var(--gold);
     color: var(--navy);
-}
-
-/* correct answer */
-#quiz button .correct-answer {
-    border: 1.5px solid var(--correct);
-    background-color: var(--correct);
-    font-weight: bolder;
-    letter-spacing: 0.5px;
-}
-
-/* incorrect answer */
-#quiz button .incorrect-answer {
-    border: 1.5px solid var(--incorrect);
-    background-color: var(--incorrect);
-    font-weight: bolder;
-    letter-spacing: 0.5px;
 }
 
 /* answer is right or wrong */

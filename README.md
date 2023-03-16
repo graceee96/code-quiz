@@ -12,6 +12,8 @@ To start the quiz, press on the start button. Players have 90 seconds to answer 
 website link: https://graceee96.github.io/code-quiz
 
 ## Credit
+Special thanks to AskBCS Learning Assistant
+
 Tutorials referenced:
 * How to create a Simple JavaScript Quiz by @jymnjogiya: https://www.geeksforgeeks.org/how-to-create-a-simple-javascript-quiz/
 

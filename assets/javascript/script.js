@@ -1,17 +1,18 @@
-//access different pages
+//html element - different pages
 var startingPage = document.querySelector('#starting-page');
 var quizPage = document.querySelector('#quiz');
 var gameOverPage = document.querySelector('#game-over');
 var highScorePage = document.querySelector('#high-scores');
 
+// html element - starting page
 var startButton = document.querySelector('.start-button');
 
-//timer-score-view high score aside thing
+//html element - quiz page: timer-score-view high score aside thing
 var timerEl = document.querySelector('.timer-counter');
 var scoreEl = document.querySelector('.score-counter');
 var viewHighScore = document.querySelector('.view-scores');
 
-//quiz page
+//html element - quiz page
 var questionEl = document.querySelector('.question');
 var optionsDiv = document.querySelector('#options'); // for event delegation
 var optionA  = document.querySelector('.option-a');
@@ -21,20 +22,25 @@ var optionD  = document.querySelector('.option-d');
 var showResult = document.querySelector('.result');
 
 
-//form elements -- game over page
+//html element - game over page
 var finalScore = document.querySelector('.final-score');
 var initialsInput = document.querySelector('.input-initials');
 var initialsSubmit = document.querySelector('.submit-button');
 
+//html elements - high score page
 var highScoreList = document.querySelector('.score');
+var goBackButton = document.querySelector('.go-back');
+var clearButton = document.querySelector('.clear-back');
 
 //global variables
 var timer;
 var timerCount;
-var numCorrect = 0;
+var numCorrect;
 var chosenQuestion = '';
 var answer;
 var questionIndex = 0;
+var initials;
+
 
 // array of questions to ask
 var toAsk = [
@@ -192,6 +198,8 @@ function renderQuizPage() {
     gameOverPage.setAttribute("style", "display: none");
     highScorePage.setAttribute("style", "display: none");
 
+    numCorrect = 0;
+    timerCount = 90;
     renderQuestions();
 };
 
@@ -202,7 +210,6 @@ function renderGameOverPage() {
     highScorePage.setAttribute("style", "display: none");
 
     finalScore.textContent = numCorrect;
-    localStorage.setItem("score", numCorrect);
 };
 
 function renderHighScoresPage() {
@@ -211,13 +218,11 @@ function renderHighScoresPage() {
     gameOverPage.setAttribute("style", "display: none");
     highScorePage.setAttribute("style", "display: block");
 
-    renderHighScores();
+    displayHighScores();
 };
 
 //starting page goes away, quiz page is shown, timer starts
 function quizStart() {
-    isCorrect = false;
-    timerCount = 90;
     timerStart();
     renderQuizPage();
 };
@@ -243,38 +248,58 @@ function timerStart() {
 
 //questions show up on quiz page pick a question randomly
 function renderQuestions() {
+    showResult.setAttribute("style", "visibility: hidden");
+
     questionEl.textContent = toAsk[questionIndex].question;
     optionA.textContent = toAsk[questionIndex].options[0].text;
     optionB.textContent = toAsk[questionIndex].options[1].text;
     optionC.textContent = toAsk[questionIndex].options[2].text;
     optionD.textContent = toAsk[questionIndex].options[3].text;
+    
+    optionA.value = toAsk[questionIndex].options[0].isCorrect;
+    optionB.value = toAsk[questionIndex].options[1].isCorrect;
+    optionC.value = toAsk[questionIndex].options[2].isCorrect;
+    optionD.value = toAsk[questionIndex].options[3].isCorrect; //sets data value to isCorrect
+
     totalQuestions--;
-    showResult.setAttribute("style", "visibility: hidden");
+
 };
 
-//answer is correct -- if i answered correctly then score goes up by 10pts & correct message pops up selected button turns green
-//answer is incorrect -- if i answered incorrectly then timer goes down by 10 seconds & incorrect message pops up selected button turns red
-function ifCorrect() {
-    if (toAsk[questionIndex].options[0].isCorrect) {
+//answer is correct -- if i answered correctly then score goes up by 10pts & correct message pops up
+//answer is incorrect -- if i answered incorrectly then timer goes down by 10 seconds & incorrect message pops up 
+function ifCorrect(answer) {
+    console.log("This is the answer: " + answer);
+    if (answer) {
         numCorrect += 10;
         scoreEl.textContent = numCorrect;
+
         questionIndex++;
         renderQuestions();
-    } else {
+    } 
+    
+    if (!answer) {
         timerCount -=10;
         timerEl.textContent = timerCount;
+
         questionIndex++;
         renderQuestions();
     };
 };
 
-//when i click on the right answer, a message pops up and the button changes color
-
-//store initials text input into a variable in local storage + score
-
 //when i click on view high scores, i stop seeing quiz page, and i see list of high scores
 
+
 //display list of high scores in order of high scores
+function displayHighScores() {
+    var lastPlayerStats = JSON.parse(localStorage.getItem("playerStats"));
+
+    console.log(lastPlayerStats);
+    if (lastPlayerStats !== null) {
+        var playerScore = document.createElement("li");
+        playerScore.textContent = lastPlayerStats.initials + " --- " + lastPlayerStats.score;
+        highScoreList.appendChild(playerScore);
+    }
+}
 
 startButton.addEventListener("click", quizStart);
 
@@ -285,23 +310,21 @@ optionsDiv.addEventListener("click", function(event) {
     console.log(element);
 
     if (element.matches(".option-btn")) {
-        ifCorrect();
+        ifCorrect(element.value);
     }
 });
 
 initialsSubmit.addEventListener('click', function() {
-    var initials = initialsInput.value.trim();
+    event.preventDefault;
 
-    localStorage.setItem("initials", initials);
+    var playerStats = {
+        initials: initialsInput.value.trim(),
+        score: numCorrect
+    };
+
+    localStorage.setItem("playerStats", JSON.stringify(playerStats));
 
     renderHighScoresPage();
-})
+});
 
-function renderHighScores() {
-    var playerInitials = getItem("initials");
-    var playerScore = getItem("score");
-    var scoreListItem = document.createElement("li");
-
-    scoreListItem.textContent = playerInitials + " --- " + playerScore;
-    highScoreList.appendChild(scoreListItem);
-}
+goBackButton.addEventListener('click', renderStartingPage);
