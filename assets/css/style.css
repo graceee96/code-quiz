@@ -79,14 +79,16 @@ body {
 /* question h2 */
 #quiz .question {
     margin-bottom: 4%;
-    width: 555px;
+    width: 650px;
     font-size: 190%;
 }
 /* answer button +hover */
+
+
 #quiz button {
-    display: none;
     margin-top: 1.5%;
-    max-width: 550px;
+    display: block;
+    max-width: 600px;
     padding: 1.5% 5%;
     border: 1.5px dashed var(--gold);
     border-radius: 20px;
@@ -326,14 +328,14 @@ body {
     }
 
     #quiz .question {
-        width: 380px;
+        width: 420px;
         height: auto;
         margin-bottom: 2.75%;
         font-size: 130%;
     }
     
     #quiz button {
-        max-width: 378.125px;
+        max-width: 420px;
         font-size: 85%;
     }
     
@@ -406,5 +408,12 @@ body {
     #high-scores .goback-clear .clear {
         width: 120.3125px;
         font-size: 85%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .card {
+        width: 350px;
+        height: 600px;
     }
 }
