@@ -28,7 +28,7 @@ body {
 
 /* starting page */
 #starting-page {
-    display: block;
+    display: none;
     padding: 110px;
 }
 
@@ -111,14 +111,14 @@ body {
 }
 
 /* aside (timer/score/view high score)*/
- #quiz aside {
+#quiz aside {
     /* border: 1px solid var(--gold); */
     width: 150px;
     height: 200px;
     position: absolute;
     left: 870px;
     top: 300px;
- }
+}
 
 #quiz #timer {
     border: 2px solid var(--gold);
@@ -233,7 +233,6 @@ body {
 
 /* high scores */
 #high-scores {
-    display: none;
     padding: 10%;
 }
 
@@ -295,4 +294,115 @@ body {
 
 #high-scores .goback-clear .clear {
     border-radius: 0 0 20px 0;
+}
+
+@media screen and (max-width: 769px) {
+    .card {
+        width: 550px;
+        height: 343.75px;
+    }
+
+    #starting-page {
+        padding: 75.625px;
+    }
+
+    #starting-page h1 {
+        font-size: 175%;
+    }
+
+    #starting-page ul {
+        margin-top: 5%;
+    }
+
+    #starting-page ul li {
+        font-size: 90%;
+    }
+    
+    #starting-page .start-button {
+        width: 137.5px;
+        margin: 9% auto 0;
+    }
+
+    #quiz .question {
+        width: 380px;
+        height: auto;
+        margin-bottom: 2.75%;
+        font-size: 130%;
+    }
+    
+    #quiz button {
+        max-width: 378.125px;
+        font-size: 85%;
+    }
+    
+    #quiz .result {
+        font-size: 100%;
+    }
+
+    #quiz aside {
+        width: 103.125px;
+        height: 137.5px;
+        left: 598.125px;
+        top: 206.25px;
+    }
+    
+    #quiz #timer h4, #quiz #timer .timer-counter,
+    #quiz #score .score-counter {
+        font-size: 34.375px;
+    }
+    
+    #quiz #view-highscore{
+        width: 103.125px;
+        font-size: 70%;
+    }
+
+    #game-over {
+        padding: 6.875%;
+    }
+    
+    #game-over h3 {
+        font-size: 103.125%;
+    }
+    
+    #game-over .final-score {
+        font-size: 481.25%;
+    }
+    
+    #game-over .submit-initials .input-initials {
+        width: 206.25px;
+        font-size: 85%;
+    }
+    
+    #game-over .submit-initials .submit-button {
+        width: 66.6875px;
+        font-size: 85%;
+    }
+
+    #high-scores {
+        padding: 10%;
+    }
+    
+    #high-scores h2 {
+        font-size: 137.5%;
+    }
+    
+    #high-scores .score-list {
+        width: 240.625px;
+        height: 120.3125px;
+        padding: 2.75%;
+    }
+    
+    #high-scores .score-list .score {
+        margin-left: 2.5vw;
+    }
+    
+    #high-scores .score-list .score li {
+        font-size: 85%;
+    }
+    
+    #high-scores .goback-clear .go-back,
+    #high-scores .goback-clear .clear {
+        width: 120.3125px;
+        font-size: 85%;
+    }
 }
