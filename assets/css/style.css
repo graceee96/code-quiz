@@ -416,4 +416,111 @@ body {
         width: 350px;
         height: 600px;
     }
+
+    #starting-page {
+        padding: 100px 75px;
+    }
+    
+    #starting-page h1 {
+        font-size: 200%;
+    }
+    
+    #starting-page ul {
+        margin-top: 30%;
+    }
+    
+    #starting-page ul li {
+        margin-bottom: 7%;
+    }
+    
+    #starting-page .start-button {
+        padding: 5%;
+        width: 150px;
+        margin: 25% auto 0;
+    }
+
+    #quiz {
+        padding: 3.5% 6%;
+    }
+    
+    /* question h2 */
+    #quiz .question {
+        margin-bottom: 4%;
+        width: 275px;
+        font-size: 175%;
+    }
+    /* answer button +hover */
+    
+    
+    #quiz button {
+        margin-top: 1.5%;
+        display: block;
+        max-width: 600px;
+        padding: 1.5% 5%;
+        border: 1.5px dashed var(--gold);
+        border-radius: 20px;
+        cursor: pointer;
+        font-weight: 100;
+        font-size: 115%;
+    }
+    
+    /* answer is right or wrong */
+    #quiz .result {
+        margin: 3% 0 0 3%;
+        font-size: 120%;
+        font-weight: bolder;
+        font-style: oblique;
+        letter-spacing: 0.5px;
+        color: var(--gold);
+    }
+    
+    /* aside (timer/score/view high score)*/
+    #quiz aside {
+        /* border: 1px solid var(--gold); */
+        width: 150px;
+        height: 200px;
+        position: absolute;
+        left: 720px;
+        top: 40px;
+    }
+    
+    #quiz #timer {
+        border: 2px solid var(--gold);
+        border-radius: 20px 20px 0 0;
+        padding: 5%;
+    }
+    
+    #quiz #timer h4, #quiz #timer .timer-counter{
+        border-radius: 20px 20px 0 0;
+        text-align: center;
+        font-family: "Andale Mono", Consolas, monospace;
+        font-size: 50px;
+        color: var(--gold)
+    }
+    
+    #quiz #score {
+        border: 2px solid var(--gold);
+        border-top: none;
+        border-bottom: none;
+        padding: 5%;
+    }
+    
+    #quiz #score .score-counter{
+        text-align: center;
+        font-family: "Andale Mono", Consolas, monospace;
+        font-size: 50px;
+        color: var(--gold)
+    }
+    
+    #quiz #view-highscore{
+        width: 150px;
+        margin-top: -1px;
+        border: 2px solid var(--gold);
+        border-radius: 0 0 20px 20px;
+        text-align: center;
+        padding: 5%;
+        background-color: var(--gold);
+        color: var(--navy);
+        font-size: smaller;
+    }
 }
