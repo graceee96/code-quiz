@@ -84,7 +84,7 @@ body {
 }
 /* answer button +hover */
 #quiz button {
-    display: block;
+    display: none;
     margin-top: 1.5%;
     max-width: 550px;
     padding: 1.5% 5%;
@@ -116,9 +116,9 @@ body {
     /* border: 1px solid var(--gold); */
     width: 150px;
     height: 200px;
-    position: relative;
-    left: 670px;
-    top: -170px;
+    position: absolute;
+    left: 720px;
+    top: 40px;
 }
 
 #quiz #timer {
@@ -344,8 +344,8 @@ body {
     #quiz aside {
         width: 103.125px;
         height: 137.5px;
-        left: 460.625px;
-        top: -116.875px;
+        left: 495px;
+        top: 27.5px;
     }
     
     #quiz #timer h4, #quiz #timer .timer-counter,
