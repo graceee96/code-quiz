@@ -28,7 +28,7 @@ body {
 
 /* starting page */
 #starting-page {
-    display: none;
+    display: block;
     padding: 110px;
 }
 
@@ -233,6 +233,7 @@ body {
 
 /* high scores */
 #high-scores {
+    display: none;
     padding: 10%;
 }
 
