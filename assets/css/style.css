@@ -72,6 +72,7 @@ body {
 /* quiz */
 #quiz {
     display: none;
+    position: relative;
     padding: 3.5% 4.5%;
 }
 
@@ -115,9 +116,9 @@ body {
     /* border: 1px solid var(--gold); */
     width: 150px;
     height: 200px;
-    position: absolute;
-    left: 870px;
-    top: 300px;
+    position: relative;
+    left: 670px;
+    top: -170px;
 }
 
 #quiz #timer {
@@ -343,8 +344,8 @@ body {
     #quiz aside {
         width: 103.125px;
         height: 137.5px;
-        left: 598.125px;
-        top: 206.25px;
+        left: 460.625px;
+        top: -116.875px;
     }
     
     #quiz #timer h4, #quiz #timer .timer-counter,
